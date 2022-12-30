@@ -3,10 +3,10 @@ import { randomUUID } from 'node:crypto';
 import { CreateNotificationBody } from './createNotificationBody';
 import { PrismaService } from './prisma.service';
 
-@Controller('notificationService')//o @ indica que é um decorator
+@Controller('notificationService') //o @ indica que é um decorator
 export class AppController {
   constructor(private readonly prisma: PrismaService) {}
- //inverção de dependências
+  //inverção de dependências
 
   @Get()
   list() {
@@ -15,7 +15,7 @@ export class AppController {
 
   @Post()
   async create(@Body() body: CreateNotificationBody) {
-    const { recipientId, content, category } = body
+    const { recipientId, content, category } = body;
 
     await this.prisma.notification.create({
       data: {
@@ -24,6 +24,6 @@ export class AppController {
         category,
         recipientId,
       },
-     });
+    });
   }
 }
